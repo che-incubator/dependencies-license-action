@@ -1,0 +1,17 @@
+name: "DEPENDENCIES.md file checker."
+description: "DEPENDENCIES.md file checker."
+author: "oandriie@redhat.com"
+
+inputs:
+  # EXCLUDE_DEPS:
+  #   description: ""
+  #   required: true
+  #   default: ""
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+branding:
+  icon: "mic"
+  color: "purple"
