@@ -2,12 +2,6 @@ name: "DEPENDENCIES.md file checker."
 description: "DEPENDENCIES.md file checker."
 author: "oandriie@redhat.com"
 
-inputs:
-  EXCLUDE_DEPS:
-    description: "List dependencies to exclude listed with comma separator"
-    required: false
-    default: ""
-
 runs:
   using: "docker"
   image: "Dockerfile"
