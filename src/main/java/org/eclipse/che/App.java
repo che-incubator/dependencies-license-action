@@ -3,7 +3,6 @@ package org.eclipse.che;
 import java.io.*;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,6 +13,9 @@ public class App {
         if (repoPath == null) {
             throw new RuntimeException("Env variable \"GITHUB_WORKSPACE\" wasn't set.");
         }
+
+        String excludeListEnv = System.getenv("EXCLUDE_DEPS");
+        List<String> excludeList = excludeListEnv != null ? Arrays.asList(excludeListEnv.split(",")) : Collections.emptyList();
 
         File goSum = new File(Path.of(repoPath, "go.sum").toUri());
         Collection<String> goSumDeps = readGoSumFile(goSum);
@@ -35,7 +37,7 @@ public class App {
         System.out.println("===================");
         List<String> missedDeps = new ArrayList<>();
         for (String goSumDep: goSumDeps) {
-            if (!declaredDep.contains(goSumDep)) {
+            if (!declaredDep.contains(goSumDep) && !excludeList.contains(goSumDep)) {
                 missedDeps.add(goSumDep);
             }
         }
