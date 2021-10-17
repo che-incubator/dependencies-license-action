@@ -16,6 +16,7 @@ public class App {
 
         String excludeListEnv = System.getenv("EXCLUDE_DEPS");
         List<String> excludeList = excludeListEnv != null ? Arrays.asList(excludeListEnv.split(",")) : Collections.emptyList();
+        System.out.println("Exclude list: " + excludeList);
 
         File goSum = new File(Path.of(repoPath, "go.sum").toUri());
         Collection<String> goSumDeps = readGoSumFile(goSum);
